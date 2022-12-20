@@ -22,7 +22,7 @@ export default class UpdateGameService {
         const gameRepository = getCustomRepository(GameRepository)
 
         const game = await gameRepository.findOne(id)
-
+        
         if(!game){
             throw new AppError('Game not found!')
         }

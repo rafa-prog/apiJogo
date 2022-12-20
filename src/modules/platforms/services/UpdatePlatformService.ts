@@ -17,13 +17,13 @@ interface IRequest {
 export default class UpdatePlatformService {
 
     public async execute({id, name, brand, controller, portable, releaseDate, description, rate}: IRequest): Promise<Platform> {
-
+        console.log(id)
         const platformRepository = getCustomRepository(PlatformRepository)
 
         const platform = await platformRepository.findOne(id)
-
+        
         if(!platform){
-            throw new AppError('Game not found!')
+            throw new AppError('Platform not found!')
         }
 
         const platformExists = await platformRepository.findByName(name)

@@ -2,17 +2,17 @@ import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import PlatformController from "../controllers/PlatformController";
 
-const gameRouter = Router()
-const gamesController = new PlatformController()
+const PlatformRouter = Router()
+const platfomController = new PlatformController()
 
 
-gameRouter.get('/', gamesController.index)
+PlatformRouter.get('/', platfomController.index)
 
-gameRouter.get('/:id', celebrate({
+PlatformRouter.get('/:id', celebrate({
     [Segments.PARAMS]: {id: Joi.string().uuid().required()}
-}), gamesController.show)
+}), platfomController.show)
 
-gameRouter.post('/', celebrate({
+PlatformRouter.post('/', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         brand: Joi.string().required(),
@@ -22,10 +22,9 @@ gameRouter.post('/', celebrate({
         description: Joi.string().required(),
         rate: Joi.number().required()
     }
-}), gamesController.create)
+}), platfomController.create)
 
-gameRouter.put('/:id', celebrate({
-    [Segments.PARAMS]: {id: Joi.string().uuid().required()},
+PlatformRouter.put('/:id', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         brand: Joi.string().required(),
@@ -35,13 +34,13 @@ gameRouter.put('/:id', celebrate({
         description: Joi.string().required(),
         rate: Joi.number().required()
     }
-}),gamesController.update)
+}),platfomController.update)
 
-gameRouter.delete('/:id', celebrate({
+PlatformRouter.delete('/:id', celebrate({
     [Segments.PARAMS]: {id: Joi.string().uuid().required()}
-}), gamesController.delete)
+}), platfomController.delete)
 
 
-export default gameRouter
+export default PlatformRouter
 
 // importar na routes -> index
