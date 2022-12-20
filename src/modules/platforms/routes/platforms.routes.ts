@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
-import GameController from "../controllers/GameController";
+import PlatformController from "../controllers/PlatformController";
 
 const gameRouter = Router()
-const gamesController = new GameController()
+const gamesController = new PlatformController()
 
 
 gameRouter.get('/', gamesController.index)
@@ -15,11 +15,10 @@ gameRouter.get('/:id', celebrate({
 gameRouter.post('/', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
-        genre: Joi.string().required(),
-        platform: Joi.string().required(),
-        developer: Joi.string().required(),
+        brand: Joi.string().required(),
+        controller: Joi.string().required(),
+        portable: Joi.boolean().required(),
         releaseDate: Joi.date().required(),
-        price: Joi.number().precision(2).required(),
         description: Joi.string().required(),
         rate: Joi.number().required()
     }
@@ -29,11 +28,10 @@ gameRouter.put('/:id', celebrate({
     [Segments.PARAMS]: {id: Joi.string().uuid().required()},
     [Segments.BODY]: {
         name: Joi.string().required(),
-        genre: Joi.string().required(),
-        platform: Joi.string().required(),
-        developer: Joi.string().required(),
+        brand: Joi.string().required(),
+        controller: Joi.string().required(),
+        portable: Joi.boolean().required(),
         releaseDate: Joi.date().required(),
-        price: Joi.number().precision(2).required(),
         description: Joi.string().required(),
         rate: Joi.number().required()
     }

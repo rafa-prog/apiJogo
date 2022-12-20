@@ -1,22 +1,20 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('games')
-export default class Game {
+@Entity('platforms')
+export default class Platform {
     @PrimaryGeneratedColumn('uuid')
     id: string
     
     @Column()
     name: string
     @Column()
-    genre: string
+    brand: string
     @Column()
-    platform: string
-    @Column()
-    developer: string
+    controller: string
+    @Column('boolean')
+    portable: Boolean
     @Column('date')
     releaseDate: Date
-    @Column('decimal')
-    price: number
     @Column()
     description: string
     @Column('int')

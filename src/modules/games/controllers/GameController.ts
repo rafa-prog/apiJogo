@@ -11,7 +11,6 @@ export default class GameController {
 
        const listGames = new ListGameService() 
        const games = await listGames.execute()
-
        return response.json(games)
     }
 
@@ -20,25 +19,23 @@ export default class GameController {
         const { id } = resquest.params
         const showGames = new ShowGameService() 
         const games = await showGames.execute({ id })
- 
+        
         return response.json(games)
     }
 
     public async create(resquest: Request, response: Response): Promise<Response> {
-
-        const {name, genre, platform, developer, price, description, rate} = resquest.body
+        const {name, genre, platform, developer, releaseDate, price, description, rate} = resquest.body
         const createGame = new CreateGameService() 
-        const games = await createGame.execute({name, genre, platform, developer, price, description, rate})
- 
+        const games = await createGame.execute({name, genre, platform, developer, releaseDate, price, description, rate})
         return response.json(games)
     }
 
     public async update(resquest: Request, response: Response): Promise<Response> {
 
         const { id } = resquest.params
-        const {name, genre, platform, developer, price, description, rate} = resquest.body
+        const {name, genre, platform, developer, releaseDate, price, description, rate} = resquest.body
         const updateGame = new UpdateGameService() 
-        const games = await updateGame.execute({ id, name, genre, platform, developer, price, description, rate})
+        const games = await updateGame.execute({ id, name, genre, platform, developer, releaseDate, price, description, rate})
  
         return response.json(games)
     }

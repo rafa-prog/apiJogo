@@ -9,6 +9,7 @@ interface IRequest {
     genre: string
     platform: string
     developer: string
+    releaseDate: Date
     price: number
     description: string
     rate: number
@@ -16,7 +17,7 @@ interface IRequest {
 
 export default class UpdateGameService {
 
-    public async execute({id, name, genre, platform, developer, price, description, rate}: IRequest): Promise<Game> {
+    public async execute({id, name, genre, platform, developer, releaseDate, price, description, rate}: IRequest): Promise<Game> {
 
         const gameRepository = getCustomRepository(GameRepository)
 
@@ -36,6 +37,7 @@ export default class UpdateGameService {
         game.genre = genre
         game.platform = platform
         game.developer = developer
+        game.releaseDate = releaseDate
         game.price = price
         game.description = description
         game.rate = rate
