@@ -26,6 +26,7 @@ gameRouter.post('/', celebrate({
 }), gamesController.create)
 
 gameRouter.put('/:id', celebrate({
+    [Segments.PARAMS]: {id: Joi.string().uuid().required()},
     [Segments.BODY]: {
         name: Joi.string().required(),
         genre: Joi.string().required(),

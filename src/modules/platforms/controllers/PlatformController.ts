@@ -34,7 +34,6 @@ export default class PlatformController {
     public async update(resquest: Request, response: Response): Promise<Response> {
 
         const { id } = resquest.params
-        console.log(id)
         const {name, brand, controller, portable, releaseDate, description, rate} = resquest.body
         const updatePlatforms = new UpdatePlatformService() 
         const platforms = await updatePlatforms.execute({id, name, brand, controller, portable, releaseDate, description, rate})

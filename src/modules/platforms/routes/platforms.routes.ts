@@ -25,6 +25,7 @@ PlatformRouter.post('/', celebrate({
 }), platfomController.create)
 
 PlatformRouter.put('/:id', celebrate({
+    [Segments.PARAMS]: {id: Joi.string().uuid().required()},
     [Segments.BODY]: {
         name: Joi.string().required(),
         brand: Joi.string().required(),
