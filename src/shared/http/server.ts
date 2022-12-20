@@ -18,7 +18,7 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
     if(error instanceof AppError) {
         return response.status(error.statusCode).json({
             status: 'error',
-            message: 'Internal Server Error'
+            message: error.message
         })
     }
 
