@@ -22,7 +22,7 @@ export default class CreateGameService {
         const gameExists = await gameRepository.findByName(name)
 
         if(gameExists) {
-            throw new AppError('There is already a game one product with this name!')
+            throw new AppError('There is already a game with this name!')
         }
 
         const game = gameRepository.create({name, genre, platform, developer, price, description, rate})
