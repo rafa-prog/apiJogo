@@ -1,8 +1,8 @@
 import CreateGameService from "../services/CreateGameService";
-import DeleteGameService from "../services/DeleteProductService";
-import ListGameService from "../services/ListProductService";
-import ShowGameService from "../services/ShowProductService";
-import UpdateGameService from "../services/UpdateProductService";
+import DeleteGameService from "../services/DeleteGameService";
+import ListGameService from "../services/ListGameService";
+import ShowGameService from "../services/ShowGameService";
+import UpdateGameService from "../services/UpdateGameService";
 import { Request, Response } from "express";
 
 
