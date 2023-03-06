@@ -1,3 +1,4 @@
+import PlatformRepository from "@modules/platforms/typeorm/repositories/PlatformRepository";
 import AppError from "src/shared/errors/appError";
 import { getCustomRepository } from "typeorm";
 import Game from "../typeorm/entities/Game";
@@ -22,8 +23,16 @@ export default class CreateGameService {
 
         const gameExists = await gameRepository.findByName(name)
         
-        if(gameExists instanceof Game) {
+        if(gameExists) {
             throw new AppError('There is already a game with this name!')
+        }
+
+        const platformRepository = getCustomRepository(PlatformRepository)
+
+        const platformExists = await platformRepository.findById(platform)
+
+        if(!platformExists) {
+            throw new AppError('Platform not found!')
         }
 
         const game = gameRepository.create({name, genre, platform, developer, releaseDate, price, description, rate})

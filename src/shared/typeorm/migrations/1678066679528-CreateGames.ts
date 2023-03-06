@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateGames1671213091824 implements MigrationInterface {
+export class CreateGames1678066679528 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -12,7 +12,7 @@ export class CreateGames1671213091824 implements MigrationInterface {
 
                     {name: 'name', type: 'varchar'},
                     {name: 'genre', type: 'varchar'},
-                    {name: 'platform', type: 'varchar'},
+                    {name: 'platform', type: 'varchar'}, // Transformar em relação entre plataformas
                     {name: 'developer', type: 'varchar'},
                     {name: 'releaseDate', type: 'date'},
                     {name: 'price', type: 'decimal', precision: 10, scale: 2},

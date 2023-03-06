@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import PlatformController from "../controllers/PlatformController";
+import isAuthenticated from "src/shared/http/middlewares/isAuthenticated";
 
 const PlatformRouter = Router()
 const platfomController = new PlatformController()
+
+PlatformRouter.use(isAuthenticated)
 
 
 PlatformRouter.get('/', platfomController.index)

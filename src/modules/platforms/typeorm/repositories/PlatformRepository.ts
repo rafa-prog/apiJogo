@@ -10,4 +10,12 @@ export default class PlatformRepository extends Repository<Platform> {
 
         return platform
     }
+
+    public async findById(id: string): Promise<Platform | undefined> {
+        const platform = await this.findOne({
+            where: { id }
+        })
+
+        return platform
+    }
 }

@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import GameController from "../controllers/GameController";
+import isAuthenticated from "src/shared/http/middlewares/isAuthenticated";
 
 const gameRouter = Router()
 const gamesController = new GameController()
 
+gameRouter.use(isAuthenticated)
 
 gameRouter.get('/', gamesController.index)
 
@@ -16,7 +18,7 @@ gameRouter.post('/', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         genre: Joi.string().required(),
-        platform: Joi.string().required(),
+        platform: Joi.string().uuid().required(),
         developer: Joi.string().required(),
         releaseDate: Joi.date().required(),
         price: Joi.number().precision(2).required(),
@@ -30,7 +32,7 @@ gameRouter.put('/:id', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         genre: Joi.string().required(),
-        platform: Joi.string().required(),
+        platform: Joi.string().uuid().required(),
         developer: Joi.string().required(),
         releaseDate: Joi.date().required(),
         price: Joi.number().precision(2).required(),
