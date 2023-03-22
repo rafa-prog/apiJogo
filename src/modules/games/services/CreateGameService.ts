@@ -7,7 +7,7 @@ import GameRepository from "../typeorm/repositories/GameRepository";
 interface IRequest {
     name: string
     genre: string
-    platform: string
+    platform_id: string
     developer: string
     releaseDate: Date
     price: number
@@ -17,25 +17,25 @@ interface IRequest {
 
 export default class CreateGameService {
 
-    public async execute({name, genre, platform, developer, releaseDate, price, description, rate}: IRequest): Promise<Game> {
-
-        const gameRepository = getCustomRepository(GameRepository)
-
-        const gameExists = await gameRepository.findByName(name)
-        
-        if(gameExists) {
-            throw new AppError('There is already a game with this name!')
-        }
+    public async execute({name, genre, platform_id, developer, releaseDate, price, description, rate}: IRequest): Promise<Game> {
 
         const platformRepository = getCustomRepository(PlatformRepository)
 
-        const platformExists = await platformRepository.findById(platform)
+        const platformExists = await platformRepository.findById(platform_id)
 
         if(!platformExists) {
             throw new AppError('Platform not found!')
         }
 
-        const game = gameRepository.create({name, genre, platform, developer, releaseDate, price, description, rate})
+        const gameRepository = getCustomRepository(GameRepository)
+
+        const gameWithSamePlatform = await gameRepository.findByNameAndPlatform(name, platform_id)     
+
+        if(gameWithSamePlatform) {
+            throw new AppError('There is already a game with this name and platform!')
+        }
+
+        const game = gameRepository.create({name, genre, platform_id, developer, releaseDate, price, description, rate})
         
         await gameRepository.save(game)
 

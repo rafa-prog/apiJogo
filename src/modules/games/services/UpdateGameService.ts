@@ -8,7 +8,7 @@ interface IRequest {
     id: string
     name: string
     genre: string
-    platform: string
+    platform_id: string
     developer: string
     releaseDate: Date
     price: number
@@ -18,7 +18,7 @@ interface IRequest {
 
 export default class UpdateGameService {
 
-    public async execute({id, name, genre, platform, developer, releaseDate, price, description, rate}: IRequest): Promise<Game> {
+    public async execute({id, name, genre, platform_id, developer, releaseDate, price, description, rate}: IRequest): Promise<Game> {
 
         const gameRepository = getCustomRepository(GameRepository)
 
@@ -28,15 +28,17 @@ export default class UpdateGameService {
             throw new AppError('Game not found!')
         }
 
-        const gameExists = await gameRepository.findByName(name)
+        const gameExists = await gameRepository.findByNameAndPlatform(name, platform_id)
 
-        if(gameExists && name != game.name) {
-            throw new AppError('There is already a game with this name!')
+        console.log(gameExists)
+
+        if(gameExists && (gameExists.id != id)) {
+            throw new AppError('There is already a game with this name and platform!')
         }
 
         const platformRepository = getCustomRepository(PlatformRepository)
 
-        const platformExists = await platformRepository.findById(platform)
+        const platformExists = await platformRepository.findById(platform_id)
 
         if(!platformExists) {
             throw new AppError('Platform not found!')
@@ -44,7 +46,7 @@ export default class UpdateGameService {
 
         game.name = name
         game.genre = genre
-        game.platform = platform
+        game.platform_id = platform_id
         game.developer = developer
         game.releaseDate = releaseDate
         game.price = price

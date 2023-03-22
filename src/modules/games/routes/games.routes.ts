@@ -18,7 +18,7 @@ gameRouter.post('/', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         genre: Joi.string().required(),
-        platform: Joi.string().uuid().required(),
+        platform_id: Joi.string().uuid().required(),
         developer: Joi.string().required(),
         releaseDate: Joi.date().required(),
         price: Joi.number().precision(2).required(),
@@ -32,7 +32,7 @@ gameRouter.put('/:id', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
         genre: Joi.string().required(),
-        platform: Joi.string().uuid().required(),
+        platform_id: Joi.string().uuid().required(),
         developer: Joi.string().required(),
         releaseDate: Joi.date().required(),
         price: Joi.number().precision(2).required(),

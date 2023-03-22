@@ -15,6 +15,14 @@ export default class GameRepository extends Repository<Game> {
         return game
     }
 
+    public async findByNameAndPlatform(name: string, platform_id: string): Promise<Game | undefined> {
+        const game = await this.findOne({
+            where: { name, platform_id }
+        })
+
+        return game
+    }
+
     public async findAllByIds(games: IFindGame[]): Promise<Game[]> {
         const gamesIds = games.map(product => product.id)
         const existsGames = await this.find({
