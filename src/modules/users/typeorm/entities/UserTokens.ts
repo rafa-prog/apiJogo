@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('user_tokens')
 export default class UserTokens {
@@ -11,6 +11,6 @@ export default class UserTokens {
     user_id: string
     @CreateDateColumn()
     created_at: Date
-    @CreateDateColumn()
+    @UpdateDateColumn()
     updated_at: Date
 }

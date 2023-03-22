@@ -7,6 +7,7 @@ import OrderRepository from "../typeorm/repositories/OrderRepository"
 
 interface IGame {
     id: string
+    price: number
 }
 
 interface IRequest {
@@ -40,20 +41,18 @@ export default class CreateOrderService {
         )
 
         if(!existsGamesIds.length) {
-            throw new AppError(`Could not find product ${checkInesistentGames[0].id}`)
+            throw new AppError(`Could not find game ${checkInesistentGames[0].id}`)
         }
 
         const serializerGames = games.map(game => ({
             game_id: game.id,
-            price: existsGames.filter(gam => gam.id === game.id)[0].price
+            price: existsGames.filter(prod => prod.id === game.id)[0].price
         }))
 
         const order = await ordersRepository.createOrder({
             customer: customerExists,
             games: serializerGames
         })
-        
-        await gameRepository.save(order)
 
         return order
 

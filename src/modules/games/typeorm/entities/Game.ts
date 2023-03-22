@@ -1,6 +1,5 @@
-import OrderGames from "@modules/orders/typeorm/entities/OrderGames";
-import Platform from "@modules/platforms/typeorm/entities/Platform";
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import OrderGames from "../../../orders/typeorm/entities/OrderGames";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('games')
 export default class Game {
@@ -28,9 +27,9 @@ export default class Game {
     description: string
     @Column('int')
     rate: number
-
+    
     @CreateDateColumn()
     created_at: Date
-    @CreateDateColumn()
+    @UpdateDateColumn()
     updated_at: Date
 }

@@ -1,9 +1,9 @@
-import Game from "@modules/games/typeorm/entities/Game";
+import Game from "../../../games/typeorm/entities/Game";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Order from "./Order";
 
 @Entity('orders_games')
-export default class OrderGames {
+export default class OrderProducts {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
@@ -20,8 +20,7 @@ export default class OrderGames {
     
     @Column('decimal')
     price: number
-    @Column('int')
-    quantity: number
+    
     @CreateDateColumn()
     created_at: Date
     @UpdateDateColumn()

@@ -24,7 +24,7 @@ export default class GameRepository extends Repository<Game> {
     }
 
     public async findAllByIds(games: IFindGame[]): Promise<Game[]> {
-        const gamesIds = games.map(product => product.id)
+        const gamesIds = games.map(game => game.id)
         const existsGames = await this.find({
             where: { id: In(gamesIds)}
         })

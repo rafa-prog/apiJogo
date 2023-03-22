@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 export default class UpdateCustomersService {
-    public async execute({id,name, email}: IRequest): Promise<Customer> {
+    public async execute({id, name, email}: IRequest): Promise<Customer> {
         const customersRepository = getCustomRepository(CustomerRepository)
         const customer = await customersRepository.findById(id)
 
